@@ -294,15 +294,15 @@ class SpotifyAudioDownloader:
         
         # Print summary
         print("\n" + "="*60)
-        print("📊 Download Summary")
+        print("Download Summary")
         print("="*60)
         print(f"Total unique tracks: {len(unique_tracks)}")
-        print(f"✅ Successfully downloaded: {successful}")
-        print(f"📁 Already downloaded: {already_downloaded}")
-        print(f"⚠️  No preview available: {no_preview}")
-        print(f"❌ Failed: {failed}")
-        print(f"\n💾 Audio samples saved to: {self.output_dir.absolute()}")
-        print(f"📋 Download log saved to: {log_path.absolute()}")
+        print(f"Successfully downloaded: {successful}")
+        print(f" Already downloaded: {already_downloaded}")
+        print(f"  No preview available: {no_preview}")
+        print(f" Failed: {failed}")
+        print(f"\n Audio samples saved to: {self.output_dir.absolute()}")
+        print(f" Download log saved to: {log_path.absolute()}")
         
         return results_df
 
