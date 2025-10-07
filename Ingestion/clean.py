@@ -4,7 +4,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# Change to project root if running as script
+
 if __name__ == "__main__":
     os.chdir(Path(__file__).parent.parent)
 
