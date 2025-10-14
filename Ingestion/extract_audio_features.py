@@ -432,7 +432,7 @@ if __name__ == "__main__":
         audio_directory = sys.argv[1]
         output_file = sys.argv[2] if len(sys.argv) > 2 else "extracted_audio_features.csv"
     else:
-        # Default: look for audio samples directory
+        
         audio_directory = "Audio_Samples"
         output_file = "Ingested_Data/extracted_audio_features.csv"
     

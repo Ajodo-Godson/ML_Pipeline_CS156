@@ -274,16 +274,16 @@ class SpotifyAudioDownloader:
             if result['success']:
                 if result['reason'] == 'Already downloaded':
                     already_downloaded += 1
-                    print(f"  ✓ Already exists")
+                    print(f" Already exists")
                 else:
                     successful += 1
-                    print(f"  ✓ Downloaded: {result['file_path']}")
+                    print(f"  Downloaded: {result['file_path']}")
             elif result['reason'] == 'No preview available':
                 no_preview += 1
-                print(f"  ⚠ No preview available")
+                print(f"  No preview available")
             else:
                 failed += 1
-                print(f"  ✗ {result['reason']}")
+                print(f" {result['reason']}")
         
         # Create results DataFrame
         results_df = pd.DataFrame(results)
