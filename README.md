@@ -25,7 +25,9 @@ ML_Pipeline_CS156/
 │  ├─ clean.py                      # clean streaming CSV (timestamps, filters)
 │  ├─ extract_audio_samples.py      # (optional) download preview clips (Node + helper)
 │  ├─ extract_audio_features.py     # AudioFeatureExtractor (single-file)
-│  └─ extract_audio_features_batch.py  # batch extractor with incremental saves
+│  └─ extract_audio_features_batch.py  # batch extractor 
+with incremental saves
+|   └─ spotify_preview_finder.js  # batch extractor 
 ├─ Ingested_Data/                  # pipeline outputs (CSVs)
 │  ├─ combined_streaming_history.csv
 │  ├─ cleaned_streaming_history.csv
@@ -39,7 +41,6 @@ ML_Pipeline_CS156/
 │  ├─ genre_classifier.py
 │  ├─ test_genre_predictions.py
 │  └─ Genre_Classification_Results/  # saved models, plots, reports
-├─ SCRIPTS_ORDER.md                # this project's run-order & usage guide
 ├─ config.py                       # Spotipy client setup (loads .env)
 ├─ requirements.txt                # Python dependencies
 ├─ package.json / node_modules/     # node helper used for preview-finder (optional)
