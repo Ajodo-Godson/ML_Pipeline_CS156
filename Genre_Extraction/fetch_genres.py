@@ -20,7 +20,7 @@ class GenreFetcher:
     def __init__(self):
         """Initialize Spotify client"""
         print("="*60)
-        print("🎵 Genre Fetcher - Spotify API")
+        print(" Genre Fetcher - Spotify API")
         print("="*60)
         
         self.sp = sp
@@ -162,7 +162,7 @@ class GenreFetcher:
             df_with_genres (pd.DataFrame): Dataset with genre information
             output_file (str): Path to save summary report
         """
-        print("\n📝 Creating genre summary report...")
+        print("\n Creating genre summary report...")
         
         with open(output_file, 'w') as f:
             f.write("="*60 + "\n")
