@@ -3,8 +3,9 @@ import glob
 import os
 
 # --- Configuration ---
-
-data_path = "/Users/godsonajodo/Documents/Fall 2025/CS156/Assignments/Spotify Account Data"
+# Set your data path and output path here
+# Ideally wherever you save your Spotify Account data haha
+data_path = "../Spotify Account Data"
 output_path = "Ingested_Data"
 
 # --- Loading the Data ---
