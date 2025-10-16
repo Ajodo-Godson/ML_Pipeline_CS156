@@ -280,7 +280,7 @@ class AudioFeatureExtractor:
         """
         try:
             # Vocal frequency range is typically 80-300 Hz (male) and 165-255 Hz (female)
-            # Use spectral analysis to detect voice-like patterns
+            
             
             # Spectral flux (measure of spectral change - vocals have more variation)
             spectral_flux = np.mean(np.abs(np.diff(librosa.feature.spectral_centroid(y=y, sr=sr))))
@@ -290,7 +290,8 @@ class AudioFeatureExtractor:
             mfcc_variance = np.mean(np.var(mfcc, axis=1))
             
             # Lower flux and variance suggests instrumental
-            # This is a rough heuristic - ideally use a trained model
+            # This is a rough heuristic 
+            # Hopefully, I have a better way to do this in next iteration
             vocal_likelihood = (spectral_flux + mfcc_variance) / 2
             instrumentalness = 1 - min(1, vocal_likelihood / 1000)  # Normalize
             
