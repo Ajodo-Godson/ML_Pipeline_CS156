@@ -62,18 +62,18 @@ def merge_datasets(streaming_csv, audio_features_csv, output_csv):
     print("="*60)
     
     # Load datasets
-    print(f"\n1️ Loading streaming history: {streaming_csv}")
+    print(f"\n  Loading streaming history: {streaming_csv}")
     streaming_df = pd.read_csv(streaming_csv)
     print(f"    Loaded {len(streaming_df):,} listening events")
     print(f"    Date range: {streaming_df['date'].min()} to {streaming_df['date'].max()}")
     
-    print(f"\n2️ Loading audio features: {audio_features_csv}")
+    print(f"\n  Loading audio features: {audio_features_csv}")
     audio_df = pd.read_csv(audio_features_csv)
     print(f"    Loaded features for {len(audio_df):,} tracks")
     print(f"    Features per track: {len(audio_df.columns)}")
     
     # Extract artist and track from audio_path
-    print(f"\n3️ Extracting artist and track info from audio filenames...")
+    print(f"\n Extracting artist and track info from audio filenames...")
     audio_df[['extracted_artist', 'extracted_track']] = audio_df['audio_path'].apply(
         lambda x: pd.Series(clean_filename_to_track_artist(x))
     )
@@ -90,7 +90,7 @@ def merge_datasets(streaming_csv, audio_features_csv, output_csv):
     print(f"    Successfully extracted info from {len(audio_df_clean):,} tracks")
     
     # Merge datasets (inner join: only streaming events with audio features)
-    print(f"\n4️ Merging datasets on artist + track name (only events with audio samples)...")
+    print(f"\n  Merging datasets on artist + track name (only events with audio samples)...")
     merged_df = streaming_df.merge(
         audio_df_clean,
         left_on=['artist_normalized', 'track_normalized'],
@@ -103,14 +103,14 @@ def merge_datasets(streaming_csv, audio_features_csv, output_csv):
     print(f"    Matched listening events: {matched_rows:,} (100%)")
 
     unique_matched_tracks = merged_df[['trackName', 'artistName']].drop_duplicates()
-    print(f"   🎵 Unique tracks with features: {len(unique_matched_tracks):,}")
+    print(f" Unique tracks with features: {len(unique_matched_tracks):,}")
 
     # Clean up temporary columns
     columns_to_drop = ['artist_normalized', 'track_normalized', 'extracted_artist', 'extracted_track']
     merged_df = merged_df.drop(columns=columns_to_drop, errors='ignore')
 
     # Save merged dataset
-    print(f"\n5️ Saving merged training dataset to: {output_csv}")
+    print(f"\n  Saving merged training dataset to: {output_csv}")
     merged_df.to_csv(output_csv, index=False)
     print(f"   Saved {len(merged_df):,} rows with {len(merged_df.columns)} columns")
 
@@ -199,4 +199,4 @@ if __name__ == "__main__":
     # Analyze merge quality
     analyze_merge_quality(merged_df)
     
-    print(f"\n All done! Your merged dataset is ready at: {output_csv}")
+    print(f"\n Completed! Merged dataset is ready at: {output_csv}")
