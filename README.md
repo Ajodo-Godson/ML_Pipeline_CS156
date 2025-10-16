@@ -1,4 +1,3 @@
-# Script Run Order and Usage
 
 This document lists the scripts in this repository and the recommended order to run them to generate the final dataset used by the notebooks (`ML_Pipeline_Final_Report_NEW.ipynb`, etc.). It includes prerequisites, commands, expected outputs, and quick verification steps.
 
@@ -103,7 +102,7 @@ Short notes:
    - Run:
      python Genre_Extraction/fetch_genres.py
    - Expected outputs: `Ingested_Data/dataset_with_genres.csv`, `Modelling/artist_genres_cache.csv`, `Modelling/genre_summary.txt`
-   
+
 
 NOTE: PROCEED TO CHECK OUT THE JUPYTER NOTEBOOK. THE OTHER STEPS ARE JUST MY PERSONAL WORK TO CREATE A PIPELINE TO TEST INTERACTIVELY: THAT IS, I HAVE A SONG SAMPLE AS INPUT AND THE SAVED MODEL PREDICTS INSTANTLY. 
 SO THE MODELLING/ WON'T BE INCLUDED HERE
