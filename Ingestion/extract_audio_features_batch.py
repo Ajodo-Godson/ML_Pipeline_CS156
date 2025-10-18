@@ -1,5 +1,5 @@
 """
-Audio Feature Extraction - Improved Batch Processing
+Audio Feature Extraction -  Batch Processing
 Saves progress incrementally to avoid data loss
 """
 
