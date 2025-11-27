@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from extract_audio_features import AudioFeatureExtractor
 
 
-def extract_features_batch(audio_dir, output_csv, batch_size=100):
+def extract_features_batch(audio_dir, output_csv, batch_size=100, fresh=False):
     """
     Extract features from all audio files with incremental saving.
     
@@ -24,6 +24,7 @@ def extract_features_batch(audio_dir, output_csv, batch_size=100):
         audio_dir (str): Path to directory containing audio files
         output_csv (str): Path to save extracted features CSV
         batch_size (int): Save progress every N files
+        fresh (bool): If True, ignore existing CSV and re-extract all features from scratch
     """
     audio_dir = Path(audio_dir)
     output_csv = Path(output_csv)
@@ -45,13 +46,15 @@ def extract_features_batch(audio_dir, output_csv, batch_size=100):
     # Initialize extractor
     extractor = AudioFeatureExtractor()
     
-    # Check if output file already exists (resume mode)
-    if output_csv.exists():
+    # Check if output file already exists (resume mode) - skip if --fresh
+    if output_csv.exists() and not fresh:
         print(f"\nResuming from existing file: {output_csv}")
         existing_df = pd.read_csv(output_csv)
         processed_paths = set(existing_df['audio_path'].values)
         print(f"Already processed: {len(processed_paths)} files")
     else:
+        if fresh and output_csv.exists():
+            print(f"\n--fresh mode: Ignoring existing {output_csv}, re-extracting all features")
         existing_df = None
         processed_paths = set()
     
@@ -145,16 +148,18 @@ def extract_features_batch(audio_dir, output_csv, batch_size=100):
 
 if __name__ == "__main__":
     import sys
+    import argparse
     
-    # Example usage
-    if len(sys.argv) > 1:
-        audio_directory = sys.argv[1]
-        output_file = sys.argv[2] if len(sys.argv) > 2 else "extracted_audio_features.csv"
-        batch_size = int(sys.argv[3]) if len(sys.argv) > 3 else 100
-    else:
-        # Default
-        audio_directory = "Audio_Samples"
-        output_file = "Ingested_Data/audio_features.csv"
-        batch_size = 100
+    parser = argparse.ArgumentParser(description='Extract audio features in batch with incremental saves.')
+    parser.add_argument('audio_dir', nargs='?', default='Audio_Samples',
+                        help='Directory containing audio files (default: Audio_Samples)')
+    parser.add_argument('output_csv', nargs='?', default='Ingested_Data/audio_features.csv',
+                        help='Output CSV path (default: Ingested_Data/audio_features.csv)')
+    parser.add_argument('batch_size', nargs='?', type=int, default=100,
+                        help='Save every N files (default: 100)')
+    parser.add_argument('--fresh', action='store_true',
+                        help='Ignore existing CSV and re-extract all features from scratch')
     
-    extract_features_batch(audio_directory, output_file, batch_size)
+    args = parser.parse_args()
+    
+    extract_features_batch(args.audio_dir, args.output_csv, args.batch_size, fresh=args.fresh)
